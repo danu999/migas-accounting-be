@@ -5,4 +5,4 @@ const router = express.Router();
 router.get("/", UserController.getAllUsers);
 router.post("/", UserController.createNewUser);
 
-module.exports = routeer;
+module.exports = router;
