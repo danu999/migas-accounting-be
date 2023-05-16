@@ -1,15 +1,19 @@
+const UsersModel = require("../models/users");
+
 //Get All User
-const getAllUsers = (req, res) => {
-  const data = {
-    id: "1",
-    name: "Danu",
-    email: "danu12@gmail.com",
-    address: "Tangerang",
-  };
-  res.json({
-    message: "Get All Users Successfully",
-    data: data,
-  });
+const getAllUsers = async (req, res) => {
+  try {
+    const [data] = await UsersModel.getAllUsers();
+    res.json({
+      message: "Get All Users Successfully",
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server Error",
+      serverMessage: error,
+    });
+  }
 };
 
 //Create New User

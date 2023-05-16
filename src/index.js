@@ -1,17 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-const mysql = require("mysql2");
+const PORT = process.env.PORT || 9000;
 const usersRoutes = require("./routes/users.js");
 const datamasterRoutes = require("./routes/datamaster.js");
 const middlewareLogRequest = require("./middleware/logs.js");
-
-const dbPool = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "atopiot123",
-  database: "migas_express",
-  port: "4000",
-});
+require("dotenv").config();
 
 const app = express();
 
@@ -21,23 +14,8 @@ app.use(express.json());
 app.use("/users", usersRoutes);
 app.use("/datamaster", datamasterRoutes);
 
-app.use("/", (req, res) => {
-  dbPool.execute('SELECT * FROM users', (err, rows) => {
-    if (err) {
-      res.json({
-        message: "connection failed",
-      });
-    }
-    res.json({
-      message: "connection success",
-      data: rows,
-    });
-  });
-});
-
-const port = 3005;
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
 
 // const bodyParser = require("body-parser");
