@@ -19,12 +19,12 @@ const getAllUsers = async (req, res) => {
 //Create New User
 const createNewUser = async (req, res) => {
   const { body } = req;
-  if (!body.email || !body.name || !body.addres) {
-    return res.status(400).json({
-      message: "Anda mengirimkan data yang salah",
-      data: null,
-    });
-  }
+  // if (!body.email || !body.name || !body.addres) {
+  //   return res.status(400).json({
+  //     message: "Anda mengirimkan data yang salah",
+  //     data: null,
+  //   });
+  // }
 
   try {
     await UsersModel.createNewUser(body);
